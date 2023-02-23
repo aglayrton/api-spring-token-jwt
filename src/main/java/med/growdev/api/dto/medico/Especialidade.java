@@ -1,4 +1,4 @@
-package med.growdev.api.medico;
+package med.growdev.api.dto.medico;
 
 public enum Especialidade {
   ORTOPEDIA,
