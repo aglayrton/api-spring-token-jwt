@@ -19,14 +19,20 @@ public record DadosCadastroMedicox(
     String crm,
     @NotNull //O SPRING JA TOMA CONTA DE ENUM, E É NOTNULL PORQUE NAO É UMA STRING
     Especialidade especialidade,
+
+    @NotBlank
+    String telefone,
+
     @NotNull
     @Valid //diz para validar esse objeto
     DadosEndereco endereco) {
+
   public DadosCadastroMedicox(Medico medico) {
      this( medico.getNome(),
        medico.getEmail(),
        medico.getCrm(),
        medico.getEspecialidade(),
+       medico.getTelefone(),
        new DadosEndereco(medico.getEndereco()));
   }
 
