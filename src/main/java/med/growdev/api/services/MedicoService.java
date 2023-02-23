@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 public class MedicoService {
@@ -18,4 +21,11 @@ public class MedicoService {
     medico = repository.save(medico);
     return new DadosCadastroMedicox(medico);
   }
+
+  public List<DadosCadastroMedicox.SimplifiedMedico> getAllSimplified() {
+    List<Medico> mdL = repository.findAll();
+    //DadosCadastroMedicox.SimplifiedMedicoé um tipo interno (inner class) de DadosCadastroMedicox, criado para representar os dados simplificados de um médico.
+    return mdL.stream().map(m -> new DadosCadastroMedicox(m).toSimplifiedMedico()).collect(Collectors.toList());
+  }
+
 }
