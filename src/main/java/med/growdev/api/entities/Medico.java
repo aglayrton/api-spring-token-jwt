@@ -23,11 +23,14 @@ public class Medico {
   @Embedded //faz com que a classe endereço faz parte da classe de medicos
   private Endereco endereco;
 
+  private String telefone;
+
   public Medico(DadosCadastroMedicox dados){
     this.nome = dados.nome();
     this.email = dados.email();
     this.crm = dados.crm();
     this.especialidade = dados.especialidade();
+    this.telefone = dados.telefone();
     this.endereco = new Endereco(dados.endereco());
   }
 
