@@ -4,6 +4,9 @@ import med.growdev.api.entities.Medico;
 import med.growdev.api.dto.medico.DadosCadastroMedicox;
 import med.growdev.api.repositories.MedicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,4 +31,17 @@ public class MedicoService {
     return mdL.stream().map(m -> new DadosCadastroMedicox(m).toSimplifiedMedico()).collect(Collectors.toList());
   }
 
+//  public Page<DadosCadastroMedicox.SimplifiedMedico> getAllSimplifiedPageable(Pageable page) {
+//    Page<Medico> mdL = repository.findAll(page);
+//    List<DadosCadastroMedicox.SimplifiedMedico> simplifiedList = mdL
+//      .stream()
+//      .map(m -> new DadosCadastroMedicox(m).toSimplifiedMedico())
+//      .collect(Collectors.toList());
+//    return new PageImpl<>(simplifiedList, page, mdL.getTotalElements());
+//  }
+
+  public Page<DadosCadastroMedicox.SimplifiedMedico> getAllSimplifiedPageable(Pageable page) {
+    Page<Medico> mdL = repository.findAll(page);
+    return mdL.map(m -> new DadosCadastroMedicox.SimplifiedMedico(m.getNome(), m.getEmail(), m.getCrm(), m.getEspecialidade()));
+  }
 }
