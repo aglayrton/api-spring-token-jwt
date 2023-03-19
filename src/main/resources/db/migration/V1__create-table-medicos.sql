@@ -3,6 +3,7 @@ create table medicos(
     nome varchar(100) not null,
     email varchar(100) not null unique,
     crm varchar(6) not null unique,
+    telefone varchar(20) not null,
     especialidade varchar(100) not null,
     logradouro varchar(100) not null,
     bairro varchar(100) not null,
