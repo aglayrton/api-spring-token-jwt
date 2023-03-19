@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import med.growdev.api.domain.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -13,11 +14,15 @@ import java.time.ZoneOffset;
 //gera, valida os tokens
 @Service
 public class TokenService {
+    @Value("${api.security.token.secret}")//trago o valor pela properties
+    private String secret;
+
     public String gerarToken(User user){
+        System.out.println(secret);
         //copiei e colei da documentacao https://github.com/auth0/java-jwt
         try {
             //
-            Algorithm algoritmo = Algorithm.HMAC256("senhaSecreta");
+            Algorithm algoritmo = Algorithm.HMAC256(secret);
             String token = JWT.create()
                     .withIssuer("API grow")//quem é api que gera o token
                     .withSubject(user.getLogin()) //quem é relacionado com o token
