@@ -1,4 +1,4 @@
-package med.growdev.api.entities;
+package med.growdev.api.domain;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
@@ -31,4 +31,5 @@ public class Endereco {
     this.cidade = endereco.cidade();
     this.uf = endereco.uf();
   }
+
 }

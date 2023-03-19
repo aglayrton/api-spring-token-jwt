@@ -1,4 +1,4 @@
-package med.growdev.api.entities;
+package med.growdev.api.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,14 +18,16 @@ public class Medico {
   private String nome;
   private String email;
   private String crm;
+  private Boolean ativo;
   @Enumerated(EnumType.STRING)
   private Especialidade especialidade;
-  @Embedded //faz com que a classe endereço faz parte da classe de medicos
+  @Embedded //faz com que a tabela endereço faz parte da tabela de medicos
   private Endereco endereco;
 
   private String telefone;
 
   public Medico(DadosCadastroMedicox dados){
+    this.ativo = true;
     this.nome = dados.nome();
     this.email = dados.email();
     this.crm = dados.crm();

@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import med.growdev.api.dto.endereco.DadosEndereco;
-import med.growdev.api.entities.Medico;
+import med.growdev.api.domain.Medico;
 
 public record DadosCadastroMedicox(
   @NotBlank
@@ -17,6 +17,7 @@ public record DadosCadastroMedicox(
   @NotBlank
   @Pattern(regexp = "\\d{4,6}") //quatro a seis digitos
   String crm,
+
   @NotNull //O SPRING JA TOMA CONTA DE ENUM, E É NOTNULL PORQUE NAO É UMA STRING
   Especialidade especialidade,
 

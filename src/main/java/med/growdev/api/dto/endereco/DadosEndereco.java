@@ -2,7 +2,7 @@ package med.growdev.api.dto.endereco;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import med.growdev.api.entities.Endereco;
+import med.growdev.api.domain.Endereco;
 
 public record DadosEndereco(
   @NotBlank
