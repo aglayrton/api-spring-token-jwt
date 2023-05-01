@@ -1,16 +1,24 @@
 package med.growdev.api.domain;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import med.growdev.api.dto.medico.DadosAtualizarMedico;
 import med.growdev.api.dto.medico.DadosCadastroMedicox;
 import med.growdev.api.dto.medico.Especialidade;
+import org.hibernate.Hibernate;
+
+import java.util.Objects;
+
 @Entity
 @Table(name = "medicos")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id") //gera o equals e hash com base na id
+//gera o equals e hash com base na id
 public class Medico {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,4 +44,28 @@ public class Medico {
     this.endereco = new Endereco(dados.endereco());
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+    Medico medico = (Medico) o;
+    return getId() != null && Objects.equals(getId(), medico.getId());
+  }
+
+  @Override
+  public int hashCode() {
+    return getClass().hashCode();
+  }
+
+  public void atualizarDados(DadosAtualizarMedico medico) {
+    if(medico.nome() != null){
+      this.nome = medico.nome();
+    }
+    if(medico.telefone() != null){
+      this.telefone = medico.telefone();
+    }
+    if(medico.endereco() != null){
+      this.endereco.atualizarDados(medico.endereco());
+    }
+  }
 }
